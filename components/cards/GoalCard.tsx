@@ -20,7 +20,7 @@ export default function GoalCard({ expanded, onToggle }: Props) {
       iconBg="color-mix(in srgb, var(--color-teal-200) 18%, transparent)"
       floatDuration="2.8s"
       floatDelay="1s"
-      positionClass="absolute bottom-[10%] left-[4%]"
+      positionClass="absolute bottom-[10%] left-[4%] md:left-[10%] lg:left-[30%] xl:left-[40%]"
     >
       <div className="flex items-start justify-between mb-8">
         <div className="flex items-center gap-4">

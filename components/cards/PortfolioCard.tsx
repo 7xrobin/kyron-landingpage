@@ -26,7 +26,7 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
       iconBg="color-mix(in srgb, var(--color-amber-100) 18%, transparent)"
       floatDuration="3.2s"
       floatDelay="0.5s"
-      positionClass="absolute top-[15%] right-[4%]"
+      positionClass="absolute top-[35%] right-[4%] md:right-[10%] lg:right-[30%] xl:right-[40%]"
     >
       <div className="flex items-center gap-4 mb-8">
         <div

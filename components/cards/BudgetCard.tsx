@@ -26,7 +26,7 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
       iconBg="color-mix(in srgb, var(--color-amber-400) 20%, transparent)"
       floatDuration="3.0s"
       floatDelay="1.4s"
-      positionClass="absolute bottom-[10%] right-[4%]"
+      positionClass="absolute bottom-[10%] right-[4%] md:right-[10%] lg:right-[30%] xl:right-[40%]"
     >
       {/* header */}
       <div className="flex items-center gap-4 mb-8">
