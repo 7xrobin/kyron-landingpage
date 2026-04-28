@@ -8,8 +8,9 @@ export default function SubCard({ label, value, valueColor }: SubCardProps) {
   return (
     <div
       style={{
-        background: "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.2)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
         borderRadius: "16px",
         padding: "14px 12px",
       }}

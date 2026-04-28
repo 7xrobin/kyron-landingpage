@@ -35,12 +35,16 @@ export default function GlassCard({
       >
         {/* glass shell — transitions between circle and card */}
         <div
-          className="relative cursor-pointer overflow-hidden shadow-2xl"
+          className="relative cursor-pointer overflow-hidden"
           style={{
-            background: "rgba(12, 8, 35, 0.55)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.14)",
+            background: "rgba(255, 255, 255, 0.08)",
+            backdropFilter: "blur(48px) saturate(160%)",
+            WebkitBackdropFilter: "blur(48px) saturate(160%)",
+            border: "1px solid rgba(255, 255, 255, 0.28)",
+            boxShadow: [
+              "0 8px 40px rgba(0, 0, 0, 0.18)",
+              "inset 0 1px 0 rgba(255, 255, 255, 0.45)",
+            ].join(", "),
             width: expanded ? "260px" : "52px",
             maxHeight: expanded ? "600px" : "52px",
             borderRadius: expanded ? "24px" : "26px",
@@ -52,6 +56,17 @@ export default function GlassCard({
           }}
           onClick={onToggle}
         >
+          {/* specular top-edge gradient — Apple material highlight */}
+          <div
+            className="absolute inset-x-0 top-0 pointer-events-none"
+            style={{
+              height: "40%",
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0) 100%)",
+              borderRadius: "inherit",
+            }}
+          />
+
           {/* icon — fills the full circle, fades out on expand */}
           <div
             className="absolute inset-0 flex items-center justify-center pointer-events-none"

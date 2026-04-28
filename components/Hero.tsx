@@ -3,7 +3,7 @@ import FloatingCards from "@/components/FloatingCards";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section className="relative min-h-[94vh] w-full overflow-hidden rounded-b-[40px]">
       <Image
         src="/phone_mockup.png"
         alt=""
