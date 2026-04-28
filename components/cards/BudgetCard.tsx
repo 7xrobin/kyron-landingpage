@@ -28,42 +28,41 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
       floatDelay="1.4s"
       positionClass="absolute bottom-[10%] right-[4%] md:right-[10%] lg:right-[30%] xl:right-[40%]"
     >
-      {/* header */}
-      <div className="flex items-center gap-4 mb-8">
-        <div
-          className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
-          style={{ background: "color-mix(in srgb, var(--color-amber-400) 20%, transparent)" }}
-        >
-          {icon}
-        </div>
-        <div>
-          <p className="text-[10px] font-bold tracking-[0.15em] text-white/50 uppercase">Budget</p>
-          <p className="text-[10px] text-white/40">Overview</p>
-        </div>
-      </div>
-
-      {/* periods */}
-      <div className="space-y-6">
-        {periods.map(({ label, spent, total, pct, color }) => (
-          <div key={label}>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs text-white/70">{label}</span>
-              <span className="text-xs font-semibold text-white">
-                ${spent.toLocaleString()}
-                <span className="text-white/40 font-normal"> / ${total.toLocaleString()}</span>
-              </span>
-            </div>
-            <div className="h-1.5 rounded-full bg-white/10">
-              <div className="h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
-            </div>
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-4">
+          <div
+            className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ background: "color-mix(in srgb, var(--color-amber-400) 20%, transparent)" }}
+          >
+            {icon}
           </div>
-        ))}
-      </div>
+          <div>
+            <p style={{ fontSize: "14px", fontWeight: 700, color: "white" }}>Budget</p>
+            <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", marginTop: "3px" }}>Overview</p>
+          </div>
+        </div>
 
-      {/* sub-cards */}
-      <div className="mt-8 grid grid-cols-2 gap-3">
-        <SubCard label="Saved"  value="$680"     valueColor="var(--color-teal-200)" />
-        <SubCard label="Status" value="On Track" />
+        <div className="flex flex-col gap-5">
+          {periods.map(({ label, spent, total, pct, color }) => (
+            <div key={label}>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs text-white/70">{label}</span>
+                <span className="text-xs font-semibold text-white">
+                  ${spent.toLocaleString()}
+                  <span className="text-white/40 font-normal"> / ${total.toLocaleString()}</span>
+                </span>
+              </div>
+              <div className="h-1.5 rounded-full bg-white/10">
+                <div className="h-full rounded-full" style={{ width: `${pct}%`, background: color }} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <SubCard label="Saved"  value="$680"     valueColor="var(--color-teal-200)" />
+          <SubCard label="Status" value="On Track" />
+        </div>
       </div>
     </GlassCard>
   );

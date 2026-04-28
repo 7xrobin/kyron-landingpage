@@ -58,60 +58,54 @@ export default function BalanceCard({ expanded, onToggle }: Props) {
       floatDelay="0s"
       positionClass="absolute top-[35%] left-[4%] md:left-[10%] lg:left-[30%] xl:left-[40%]"
     >
-      <div className="flex items-center gap-4 mb-8">
-        <div
-          className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
-          style={{
-            background:
-              "color-mix(in srgb, var(--color-purple-400) 18%, transparent)",
-          }}
-        >
-          {icon}
-        </div>
-        <div>
-          <p className="text-[10px] font-bold tracking-[0.15em] text-white/50 uppercase">
-            Balance
-          </p>
-          <p
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-4">
+          <div
+            className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
             style={{
-              fontSize: "10px",
-              color: "rgba(255,255,255,0.4)",
-              marginTop: "3px",
+              background:
+                "color-mix(in srgb, var(--color-purple-400) 18%, transparent)",
             }}
           >
-            by region
-          </p>
-        </div>
-      </div>
-
-      <div className="space-y-6">
-        {regions.map(({ flag, name, amount, bar, color }) => (
-          <div key={name}>
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <span className="text-sm">{flag}</span>
-                <span className="text-xs text-white/70">{name}</span>
-              </div>
-              <span className="text-xs font-semibold text-white">{amount}</span>
-            </div>
-            <div className="h-1.5 rounded-full bg-white/10">
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${bar}%`, background: color }}
-              />
-            </div>
+            {icon}
           </div>
-        ))}
-      </div>
+          <div>
+            <p style={{ fontSize: "14px", fontWeight: 700, color: "white" }}>Balance</p>
+            <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", marginTop: "3px" }}>
+              by region
+            </p>
+          </div>
+        </div>
 
-      <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-        <span className="text-[10px] text-white/40">Combined (EUR)</span>
-        <span
-          className="text-sm font-bold"
-          style={{ color: "var(--color-purple-200)" }}
-        >
-          €10,765
-        </span>
+        <div className="flex flex-col gap-5">
+          {regions.map(({ flag, name, amount, bar, color }) => (
+            <div key={name}>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">{flag}</span>
+                  <span className="text-xs text-white/70">{name}</span>
+                </div>
+                <span className="text-xs font-semibold text-white">{amount}</span>
+              </div>
+              <div className="h-1.5 rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full"
+                  style={{ width: `${bar}%`, background: color }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="pt-5 border-t border-white/10 flex items-center justify-between">
+          <span className="text-[10px] text-white/40">Combined (EUR)</span>
+          <span
+            className="text-sm font-bold"
+            style={{ color: "var(--color-purple-200)" }}
+          >
+            €10,765
+          </span>
+        </div>
       </div>
     </GlassCard>
   );

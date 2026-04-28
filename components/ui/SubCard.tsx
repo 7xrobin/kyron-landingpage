@@ -12,7 +12,7 @@ export default function SubCard({ label, value, valueColor }: SubCardProps) {
         border: "1px solid rgba(255,255,255,0.2)",
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.25)",
         borderRadius: "16px",
-        padding: "14px 12px",
+        padding: "10px 10px",
       }}
     >
       <p style={{ fontSize: "9px", color: "rgba(255,255,255,0.4)", marginBottom: "6px", letterSpacing: "0.05em" }}>

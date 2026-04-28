@@ -28,54 +28,56 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
       floatDelay="0.5s"
       positionClass="absolute top-[35%] right-[4%] md:right-[10%] lg:right-[30%] xl:right-[40%]"
     >
-      <div className="flex items-center gap-4 mb-8">
-        <div
-          className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
-          style={{ background: "color-mix(in srgb, var(--color-amber-100) 18%, transparent)" }}
-        >
-          {icon}
-        </div>
-        <div className="flex-1">
-          <p className="text-[10px] font-bold tracking-[0.15em] text-white/50 uppercase">Portfolio</p>
-        </div>
-        <span
-          style={{
-            fontSize: "10px",
-            padding: "2px 10px",
-            borderRadius: "999px",
-            fontWeight: 600,
-            background: "color-mix(in srgb, var(--color-purple-400) 25%, transparent)",
-            color: "var(--color-purple-200)",
-          }}
-        >
-          Active
-        </span>
-      </div>
-
-      <div className="flex h-2.5 rounded-full overflow-hidden gap-px mb-7">
-        {allocations.map(({ label, width, color }) => (
-          <div key={label} style={{ width, background: color }} />
-        ))}
-      </div>
-
-      <div className="space-y-5 mb-8">
-        {allocations.map(({ label, pct, color, sub }) => (
-          <div key={label} className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
-              <div>
-                <p className="text-xs font-semibold text-white leading-none">{label}</p>
-                <p style={{ fontSize: "9px", color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>{sub}</p>
-              </div>
-            </div>
-            <span className="text-sm font-bold text-white">{pct}</span>
+      <div className="flex flex-col gap-5">
+        <div className="flex items-center gap-4">
+          <div
+            className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
+            style={{ background: "color-mix(in srgb, var(--color-amber-100) 18%, transparent)" }}
+          >
+            {icon}
           </div>
-        ))}
-      </div>
+          <div className="flex-1">
+            <p style={{ fontSize: "14px", fontWeight: 700, color: "white" }}>Portfolio</p>
+          </div>
+          <span
+            style={{
+              fontSize: "10px",
+              padding: "2px 10px",
+              borderRadius: "999px",
+              fontWeight: 600,
+              background: "color-mix(in srgb, var(--color-purple-400) 25%, transparent)",
+              color: "var(--color-purple-200)",
+            }}
+          >
+            Active
+          </span>
+        </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        <SubCard label="Total Value" value="€24,800" />
-        <SubCard label="YTD Return"  value="+8.4%"   valueColor="var(--color-teal-200)" />
+        <div className="flex h-2.5 rounded-full overflow-hidden gap-px">
+          {allocations.map(({ label, width, color }) => (
+            <div key={label} style={{ width, background: color }} />
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {allocations.map(({ label, pct, color, sub }) => (
+            <div key={label} className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
+                <p className="text-xs font-semibold text-white">
+                  {label}
+                  <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.4)" }}> · {sub}</span>
+                </p>
+              </div>
+              <span className="text-xs font-bold text-white">{pct}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <SubCard label="Total Value" value="€24,800" />
+          <SubCard label="YTD Return"  value="+8.4%"   valueColor="var(--color-teal-200)" />
+        </div>
       </div>
     </GlassCard>
   );

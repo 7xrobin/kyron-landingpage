@@ -82,7 +82,7 @@ export default function GlassCard({
           {/* card content — fades in on expand, inline padding to avoid class conflicts */}
           <div
             style={{
-              padding: "1.5rem",
+              padding: "1rem",
               opacity: expanded ? 1 : 0,
               transition: "opacity 300ms 200ms",
               pointerEvents: expanded ? "auto" : "none",
