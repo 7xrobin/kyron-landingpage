@@ -25,14 +25,13 @@ export default function Hero() {
         </p>
       </div>
 
-      <FloatingCards />
-
       {/* CTA — anchored below the floating cards */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
         <button
           className="rounded-full px-14 py-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           style={{
-            background: "linear-gradient(90deg, rgba(240,78,122,0.72) 0%, rgba(249,115,22,0.72) 100%)",
+            background:
+              "linear-gradient(90deg, rgba(240,78,122,0.72) 0%, rgba(249,115,22,0.72) 100%)",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
           }}
