@@ -26,18 +26,7 @@ export default function Nav() {
         </span>
 
         {/* Links */}
-        <div className="flex items-center gap-7">
-          {["Product", "Goals", "Trust"].map((label) => (
-            <a
-              key={label}
-              href={`#${label.toLowerCase()}`}
-              className="text-sm font-medium text-gray-800 hover:opacity-70 transition-opacity"
-              style={{ color: "#1a1a1a" }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
+        <div className="flex items-center gap-7"></div>
 
         {/* CTA */}
         <button
