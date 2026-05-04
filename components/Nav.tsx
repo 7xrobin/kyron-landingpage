@@ -13,17 +13,7 @@ export default function Nav() {
         }}
       >
         {/* Logo */}
-        <span
-          className="text-xl font-extrabold tracking-widest uppercase"
-          style={{
-            background: "linear-gradient(90deg, #f04e7a 0%, #f97316 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          Kyron
-        </span>
+        <img src="/logo.svg" alt="Kyron" height={20} className="h-5 w-auto" />
 
         {/* Links */}
         <div className="flex items-center gap-7"></div>
