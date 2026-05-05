@@ -15,7 +15,7 @@ export default function SubCard({ label, value, valueColor }: SubCardProps) {
         padding: "10px 10px",
       }}
     >
-      <p style={{ fontSize: "9px", color: "rgba(255,255,255,0.4)", marginBottom: "6px", letterSpacing: "0.05em" }}>
+      <p style={{ fontSize: "9px", fontWeight: 600, color: "white", marginBottom: "6px", letterSpacing: "0.05em" }}>
         {label}
       </p>
       <p style={{ fontSize: "14px", fontWeight: 700, color: valueColor ?? "white" }}>

@@ -23,16 +23,16 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
       expanded={expanded}
       onToggle={onToggle}
       icon={icon}
-      iconBg="color-mix(in srgb, var(--color-amber-100) 18%, transparent)"
+      iconBg="color-mix(in srgb, var(--color-amber-100) 38%, transparent)"
       floatDuration="3.2s"
       floatDelay="0.5s"
       positionClass=""
     >
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-3 md:gap-5">
         <div className="flex items-center gap-4">
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
-            style={{ background: "color-mix(in srgb, var(--color-amber-100) 18%, transparent)" }}
+            style={{ background: "color-mix(in srgb, var(--color-amber-100) 38%, transparent)" }}
           >
             {icon}
           </div>
@@ -44,9 +44,9 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
               fontSize: "10px",
               padding: "2px 10px",
               borderRadius: "999px",
-              fontWeight: 600,
-              background: "color-mix(in srgb, var(--color-purple-400) 25%, transparent)",
-              color: "var(--color-purple-200)",
+              fontWeight: 700,
+              background: "color-mix(in srgb, var(--color-purple-400) 38%, transparent)",
+              color: "white",
             }}
           >
             Active
@@ -59,14 +59,14 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {allocations.map(({ label, pct, color, sub }) => (
             <div key={label} className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
-                <p className="text-xs font-semibold text-white">
+                <p className="text-xs font-bold text-white">
                   {label}
-                  <span style={{ fontWeight: 400, color: "rgba(255,255,255,0.4)" }}> · {sub}</span>
+                  <span className="font-semibold text-white"> · {sub}</span>
                 </p>
               </div>
               <span className="text-xs font-bold text-white">{pct}</span>
@@ -74,9 +74,10 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        {/* Hidden on mobile to keep card compact */}
+        <div className="hidden md:grid grid-cols-2 gap-3">
           <SubCard label="Total Value" value="€24,800" />
-          <SubCard label="YTD Return"  value="+8.4%"   valueColor="var(--color-teal-200)" />
+          <SubCard label="YTD Return"  value="+8.4%" />
         </div>
       </div>
     </GlassCard>

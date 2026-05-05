@@ -23,33 +23,33 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
       expanded={expanded}
       onToggle={onToggle}
       icon={icon}
-      iconBg="color-mix(in srgb, var(--color-amber-400) 20%, transparent)"
+      iconBg="color-mix(in srgb, var(--color-amber-400) 38%, transparent)"
       floatDuration="3.0s"
       floatDelay="1.4s"
       positionClass=""
     >
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-3 md:gap-5">
         <div className="flex items-center gap-4">
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
-            style={{ background: "color-mix(in srgb, var(--color-amber-400) 20%, transparent)" }}
+            style={{ background: "color-mix(in srgb, var(--color-amber-400) 38%, transparent)" }}
           >
             {icon}
           </div>
           <div>
             <p style={{ fontSize: "14px", fontWeight: 700, color: "white" }}>Budget</p>
-            <p style={{ fontSize: "10px", color: "rgba(255,255,255,0.4)", marginTop: "3px" }}>Overview</p>
+            <p style={{ fontSize: "10px", fontWeight: 600, color: "white", marginTop: "3px" }}>Overview</p>
           </div>
         </div>
 
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3">
           {periods.map(({ label, spent, total, pct, color }) => (
             <div key={label}>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs text-white/70">{label}</span>
-                <span className="text-xs font-semibold text-white">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-bold text-white">{label}</span>
+                <span className="text-xs font-bold text-white">
                   ${spent.toLocaleString()}
-                  <span className="text-white/40 font-normal"> / ${total.toLocaleString()}</span>
+                  <span className="font-semibold text-white"> / ${total.toLocaleString()}</span>
                 </span>
               </div>
               <div className="h-1.5 rounded-full bg-white/10">
@@ -59,8 +59,9 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <SubCard label="Saved"  value="$680"     valueColor="var(--color-teal-200)" />
+        {/* Hidden on mobile to keep card compact */}
+        <div className="hidden md:grid grid-cols-2 gap-3">
+          <SubCard label="Saved"  value="$680" />
           <SubCard label="Status" value="On Track" />
         </div>
       </div>
