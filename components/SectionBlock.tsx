@@ -42,8 +42,8 @@ export default function SectionBlock({
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
       const progress = rect.top / window.innerHeight;
-      // Smaller parallax on mobile to avoid card overflowing outside the image
-      setParallaxY(progress * (isMobile ? 20 : 55));
+      // No parallax on mobile — keeps card position stable and avoids overflow
+      setParallaxY(isMobile ? 0 : progress * 55);
     };
     window.addEventListener("scroll", handler, { passive: true });
     handler();

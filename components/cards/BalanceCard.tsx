@@ -5,13 +5,13 @@ import GlassCard from "@/components/ui/GlassCard";
 
 const icon = (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <circle cx="9" cy="9" r="7.5" stroke="var(--color-purple-200)" strokeWidth="1.3" />
+    <circle cx="9" cy="9" r="7.5" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
     <path
       d="M9 1.5C7.5 3.5 6.5 6 6.5 9C6.5 12 7.5 14.5 9 16.5M9 1.5C10.5 3.5 11.5 6 11.5 9C11.5 12 10.5 14.5 9 16.5"
-      stroke="var(--color-purple-200)"
+      stroke="rgba(255,255,255,0.85)"
       strokeWidth="1.3"
     />
-    <line x1="1.5" y1="9" x2="16.5" y2="9" stroke="var(--color-purple-200)" strokeWidth="1.3" />
+    <line x1="1.5" y1="9" x2="16.5" y2="9" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
   </svg>
 );
 
@@ -21,9 +21,9 @@ const regions = [
 ];
 
 const accounts = [
-  { icon: "🏦", name: "Wise",    sub: "EUR Checking", amount: "€5,200", bar: 48, color: "var(--color-purple-400)", negative: false },
-  { icon: "🏛️", name: "N26",     sub: "DE Savings",   amount: "€3,230", bar: 30, color: "var(--color-teal-200)",   negative: false },
-  { icon: "💳", name: "Revolut", sub: "Credit Card",  amount: "-€460",  bar: 18, color: "var(--color-amber-400)",  negative: true  },
+  { icon: "🏦", name: "Wise",    sub: "EUR · Checking", amount: "€5,200"  },
+  { icon: "🏛️", name: "N26",     sub: "EUR · Savings",  amount: "€3,230"  },
+  { icon: "💳", name: "Chase",   sub: "USD · Credit",   amount: "-$520"   },
 ];
 
 interface Props { expanded: boolean; onToggle: () => void }
@@ -41,7 +41,7 @@ export default function BalanceCard({ expanded, onToggle }: Props) {
       floatDelay="0s"
       positionClass=""
     >
-      <div className="flex flex-col gap-3 md:gap-5">
+      <div className="flex flex-col gap-3 md:gap-4">
         {/* Header */}
         <div className="flex items-center gap-3">
           <div
@@ -83,7 +83,7 @@ export default function BalanceCard({ expanded, onToggle }: Props) {
 
         {/* Currency view */}
         {view === "currency" && (
-          <div className="flex flex-col gap-3 md:gap-5">
+          <div className="flex flex-col gap-3">
             {regions.map(({ flag, name, amount, bar, color }) => (
               <div key={name}>
                 <div className="flex items-center justify-between mb-2">
@@ -101,30 +101,25 @@ export default function BalanceCard({ expanded, onToggle }: Props) {
           </div>
         )}
 
-        {/* Accounts view */}
+        {/* Accounts view — no bars, keeps height equal to currency view */}
         {view === "accounts" && (
           <div className="flex flex-col gap-3">
-            {accounts.map(({ icon: emoji, name, sub, amount, bar, color }) => (
-              <div key={name}>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm">{emoji}</span>
-                    <div>
-                      <span className="text-xs font-semibold text-white">{name}</span>
-                      <span className="text-[10px] font-semibold ml-1 text-white">{sub}</span>
-                    </div>
+            {accounts.map(({ icon: emoji, name, sub, amount }) => (
+              <div key={name} className="flex items-center justify-between py-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">{emoji}</span>
+                  <div>
+                    <p className="text-xs font-bold text-white">{name}</p>
+                    <p className="text-[10px] font-semibold text-white">{sub}</p>
                   </div>
-                  <span className="text-xs font-bold text-white">{amount}</span>
                 </div>
-                <div className="h-1.5 rounded-full bg-white/10">
-                  <div className="h-full rounded-full" style={{ width: `${bar}%`, background: color }} />
-                </div>
+                <span className="text-xs font-bold text-white">{amount}</span>
               </div>
             ))}
           </div>
         )}
 
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+        <div className="pt-2 border-t border-white/10 flex items-center justify-between">
           <span className="text-[10px] font-semibold text-white">Combined (EUR)</span>
           <span className="text-sm font-bold text-white">€10,765</span>
         </div>

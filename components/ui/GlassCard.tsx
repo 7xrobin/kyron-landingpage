@@ -10,6 +10,7 @@ interface GlassCardProps {
   floatDuration?: string;
   floatDelay?: string;
   positionClass: string;
+  expandedHeight?: string;
   children: ReactNode;
 }
 
@@ -21,6 +22,7 @@ export default function GlassCard({
   floatDuration = "3s",
   floatDelay = "0s",
   positionClass,
+  expandedHeight = "220px",
   children,
 }: GlassCardProps) {
   return (
@@ -46,6 +48,7 @@ export default function GlassCard({
               "inset 0 1px 0 rgba(255, 255, 255, 0.45)",
             ].join(", "),
             width: expanded ? "260px" : "52px",
+            minHeight: expanded ? expandedHeight : "0px",
             maxHeight: expanded ? "600px" : "52px",
             borderRadius: expanded ? "24px" : "26px",
             transition: [

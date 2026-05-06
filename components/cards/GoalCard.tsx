@@ -2,15 +2,15 @@ import GlassCard from "@/components/ui/GlassCard";
 
 const icon = (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <circle cx="9" cy="9" r="7.5" stroke="var(--color-teal-200)" strokeWidth="1.3" />
-    <circle cx="9" cy="9" r="4.5" stroke="var(--color-teal-200)" strokeWidth="1.3" />
-    <circle cx="9" cy="9" r="1.8" fill="var(--color-teal-200)" />
+    <circle cx="9" cy="9" r="7.5" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+    <circle cx="9" cy="9" r="4.5" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+    <circle cx="9" cy="9" r="1.8" fill="rgba(255,255,255,0.85)" />
   </svg>
 );
 
 const goals = [
   { name: "Dream Vacation", target: "$11,250", pct: 75, gradient: "linear-gradient(90deg, var(--color-teal-200), var(--color-purple-400))" },
-  { name: "House",          target: "$85,000", pct: 23, gradient: "linear-gradient(90deg, var(--color-purple-400), var(--color-amber-400))" },
+  { name: "House",          target: "$85,000", pct: 23, gradient: "linear-gradient(90deg, var(--color-teal-200), var(--color-purple-400))" },
   { name: "Emergency Fund", target: "$10,000", pct: 60, gradient: "linear-gradient(90deg, var(--color-teal-200), var(--color-purple-400))" },
 ];
 
@@ -27,7 +27,7 @@ export default function GoalCard({ expanded, onToggle }: Props) {
       floatDelay="1s"
       positionClass=""
     >
-      <div className="flex flex-col gap-3 md:gap-5">
+      <div className="flex flex-col gap-3 md:gap-4">
         <div className="flex items-center gap-4">
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"

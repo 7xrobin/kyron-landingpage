@@ -3,10 +3,10 @@ import SubCard from "@/components/ui/SubCard";
 
 const icon = (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <rect x="1.5" y="4.5" width="15" height="11" rx="2" stroke="var(--color-amber-100)" strokeWidth="1.3" />
-    <path d="M1.5 7.5h15" stroke="var(--color-amber-100)" strokeWidth="1.3" />
-    <rect x="11" y="10" width="4" height="3" rx="1" stroke="var(--color-amber-100)" strokeWidth="1.1" />
-    <path d="M4.5 2.5h9" stroke="var(--color-amber-100)" strokeWidth="1.3" strokeLinecap="round" />
+    <rect x="1.5" y="4.5" width="15" height="11" rx="2" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+    <path d="M1.5 7.5h15" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+    <rect x="11" y="10" width="4" height="3" rx="1" stroke="rgba(255,255,255,0.85)" strokeWidth="1.1" />
+    <path d="M4.5 2.5h9" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" strokeLinecap="round" />
   </svg>
 );
 
@@ -28,7 +28,7 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
       floatDelay="1.4s"
       positionClass=""
     >
-      <div className="flex flex-col gap-3 md:gap-5">
+      <div className="flex flex-col gap-3 md:gap-4">
         <div className="flex items-center gap-4">
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -49,7 +49,7 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
                 <span className="text-xs font-bold text-white">{label}</span>
                 <span className="text-xs font-bold text-white">
                   ${spent.toLocaleString()}
-                  <span className="font-semibold text-white"> / ${total.toLocaleString()}</span>
+                  <span className="font-semibold"> / ${total.toLocaleString()}</span>
                 </span>
               </div>
               <div className="h-1.5 rounded-full bg-white/10">
@@ -59,7 +59,6 @@ export default function BudgetCard({ expanded, onToggle }: Props) {
           ))}
         </div>
 
-        {/* Hidden on mobile to keep card compact */}
         <div className="hidden md:grid grid-cols-2 gap-3">
           <SubCard label="Saved"  value="$680" />
           <SubCard label="Status" value="On Track" />

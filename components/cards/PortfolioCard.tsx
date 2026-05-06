@@ -3,9 +3,9 @@ import SubCard from "@/components/ui/SubCard";
 
 const icon = (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <rect x="1"  y="10" width="4" height="7"  rx="1" fill="var(--color-amber-100)" />
-    <rect x="7"  y="5"  width="4" height="12" rx="1" fill="var(--color-amber-100)" />
-    <rect x="13" y="7"  width="4" height="10" rx="1" fill="var(--color-amber-100)" />
+    <rect x="1"  y="10" width="4" height="7"  rx="1" fill="rgba(255,255,255,0.85)" />
+    <rect x="7"  y="5"  width="4" height="12" rx="1" fill="rgba(255,255,255,0.85)" />
+    <rect x="13" y="7"  width="4" height="10" rx="1" fill="rgba(255,255,255,0.85)" />
   </svg>
 );
 
@@ -28,7 +28,7 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
       floatDelay="0.5s"
       positionClass=""
     >
-      <div className="flex flex-col gap-3 md:gap-5">
+      <div className="flex flex-col gap-3 md:gap-4">
         <div className="flex items-center gap-4">
           <div
             className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
@@ -65,8 +65,7 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
               <div className="flex items-center gap-3">
                 <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: color }} />
                 <p className="text-xs font-bold text-white">
-                  {label}
-                  <span className="font-semibold text-white"> · {sub}</span>
+                  {label}<span className="font-semibold"> · {sub}</span>
                 </p>
               </div>
               <span className="text-xs font-bold text-white">{pct}</span>
@@ -74,7 +73,6 @@ export default function PortfolioCard({ expanded, onToggle }: Props) {
           ))}
         </div>
 
-        {/* Hidden on mobile to keep card compact */}
         <div className="hidden md:grid grid-cols-2 gap-3">
           <SubCard label="Total Value" value="€24,800" />
           <SubCard label="YTD Return"  value="+8.4%" />
