@@ -307,7 +307,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
         {/* Avatar */}
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: "linear-gradient(135deg, #7f77dd, #5dcaa5)" }}
+          style={{ background: "linear-gradient(90deg, #f04e7a, #f97316)" }}
         >
           <span className="text-white text-sm font-bold">K</span>
         </div>
@@ -364,10 +364,17 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
             <button
               key={tag}
               onClick={() => handleTopicSelect(tag, title)}
-              className="flex flex-col gap-2 flex-shrink-0 min-w-[140px] bg-white/10 border border-white/20 rounded-2xl px-3 py-3 cursor-pointer hover:bg-white/15 transition-colors text-left"
+              className="flex flex-col gap-2 flex-shrink-0 min-w-[140px] rounded-2xl px-3 py-3 cursor-pointer transition-opacity hover:opacity-80 text-left"
+              style={{
+                background: "rgba(255,255,255,0.65)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
+              }}
             >
               {TOPIC_ICONS[tag]}
-              <span className="text-white text-xs leading-snug">{title}</span>
+              <span className="text-gray-800 text-xs leading-snug">
+                {title}
+              </span>
             </button>
           ))}
         </div>

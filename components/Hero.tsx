@@ -8,7 +8,8 @@ export default function Hero() {
   const [showChat, setShowChat] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = showChat ? "hidden" : "";
+    const isMobile = window.innerWidth < 640;
+    document.body.style.overflow = showChat && isMobile ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -49,12 +50,13 @@ export default function Hero() {
         </p>
         <button
           onClick={() => setShowChat(true)}
-          className="mt-8 rounded-full px-8 py-4 text-white text-base font-semibold shadow-lg"
-          style={{
-            background: "linear-gradient(90deg, #f04e7a 0%, #f97316 100%)",
-          }}
+          className="mt-8 flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold transition-opacity hover:opacity-90"
+          style={{ background: "white", color: "var(--color-gray-900)" }}
         >
           Talk with Kyron
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M6.5 0L7.9 4.6L13 6.5L7.9 8.4L6.5 13L5.1 8.4L0 6.5L5.1 4.6L6.5 0Z" fill="#f04e7a" />
+          </svg>
         </button>
       </div>
 
