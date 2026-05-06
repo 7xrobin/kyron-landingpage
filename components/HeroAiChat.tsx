@@ -2,20 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const SYSTEM_PROMPT = ``; // placeholder — defined separately
-
 interface Message {
   id: string;
   role: "user" | "assistant";
   content: string;
 }
-
-const INITIAL_MESSAGE: Message = {
-  id: "init",
-  role: "assistant",
-  content:
-    "Hi! I'm Kyron, your AI financial assistant. I can help you understand your finances, set goals, navigate taxes, and plan your investments. What would you like to explore?",
-};
 
 const TOPIC_CARDS = [
   { tag: "finances", title: "Show me my finances overview" },
@@ -199,21 +190,42 @@ const TOPIC_ICONS = {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
+function AssistantAvatar() {
+  return (
+    <div
+      className="w-5 h-5 rounded-full flex-shrink-0 mt-0.5"
+      style={{ background: "linear-gradient(135deg, #7f77dd, #f97316)" }}
+    />
+  );
+}
+
 function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === "user";
+
+  if (!isUser) {
+    return (
+      <div className="flex items-start gap-2 justify-start">
+        <AssistantAvatar />
+        <p className="text-sm text-white/90 leading-relaxed max-w-[80%]">
+          {message.content || (
+            <span className="animate-pulse opacity-70">▍</span>
+          )}
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+    <div className="flex justify-end">
       <div
-        className={`text-sm px-3 py-2 max-w-[80%] text-black ${
-          isUser ? "rounded-2xl rounded-tr-sm" : "rounded-2xl rounded-tl-sm"
-        }`}
+        className="text-sm px-3 py-2 max-w-[80%] text-black rounded-2xl rounded-tr-sm"
         style={{
           background: "rgba(255,255,255,0.65)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
         }}
       >
-        {message.content || <span className="animate-pulse opacity-70">▍</span>}
+        {message.content}
       </div>
     </div>
   );
@@ -230,11 +242,12 @@ function SendIcon() {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
-  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [isLoading] = useState(false); // always false until API wired
+  const [isLoading, setIsLoading] = useState(false);
   const [showTopics, setShowTopics] = useState(true);
   const [turnCount, setTurnCount] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const threadRef = useRef<HTMLDivElement>(null);
@@ -250,18 +263,66 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
     return () => clearTimeout(t);
   }, [error]);
 
-  function sendMessage(text: string) {
+  async function sendMessage(text: string) {
     if (isLoading || !text.trim()) return;
+
     const userMsg: Message = {
       id: crypto.randomUUID(),
       role: "user",
-      content: text,
+      content: text.trim(),
     };
-    setMessages((prev) => [...prev, userMsg]);
+
+    const nextMessages = [...messages, userMsg];
+
+    setHasInteracted(true);
+    setMessages(nextMessages);
     setInput("");
     setTurnCount((prev) => prev + 1);
+    setIsLoading(true);
     inputRef.current?.focus({ preventScroll: true });
-    // TODO: stream LLM response here
+
+    const assistantId = crypto.randomUUID();
+    setMessages((prev) => [
+      ...prev,
+      { id: assistantId, role: "assistant", content: "" },
+    ]);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: nextMessages.map(({ role, content }) => ({
+            role,
+            content,
+          })),
+        }),
+      });
+
+      if (!res.ok || !res.body) {
+        throw new Error(await res.text());
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        setMessages((prev) =>
+          prev.map((m) =>
+            m.id === assistantId ? { ...m, content: m.content + chunk } : m,
+          ),
+        );
+      }
+    } catch (err) {
+      setMessages((prev) => prev.filter((m) => m.id !== assistantId));
+      setError("Something went wrong. Please try again.");
+      console.error("[kyron:chat]", err);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   function trackIntent(tag: string) {
@@ -342,12 +403,40 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
       {/* Chat thread */}
       <div
         ref={threadRef}
-        className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3 relative z-10"
+        className="flex-1 overflow-y-auto px-4 flex flex-col relative z-10"
         style={{ scrollbarWidth: "none" } as React.CSSProperties}
       >
-        {messages.map((msg) => (
-          <MessageBubble key={msg.id} message={msg} />
-        ))}
+        {/* Hero heading — shown before first interaction */}
+        <div
+          className="absolute inset-x-0 px-6 flex flex-col items-center justify-center pointer-events-none"
+          style={{
+            top: 0,
+            bottom: 0,
+            opacity: hasInteracted ? 0 : 1,
+            transform: hasInteracted ? "scale(0.95)" : "scale(1)",
+            transition: "opacity 400ms ease, transform 400ms ease",
+          }}
+        >
+          <p className="text-white text-[22px] font-medium text-center leading-snug">
+            Hi, I&apos;m Kyron.
+          </p>
+          <p className="text-white text-[22px] font-medium text-center leading-snug mt-1">
+            How can we improve your finances today?
+          </p>
+        </div>
+
+        {/* Message list — shown after first interaction */}
+        <div
+          className="flex flex-col gap-3 py-3"
+          style={{
+            opacity: hasInteracted ? 1 : 0,
+            transition: "opacity 400ms ease 100ms",
+          }}
+        >
+          {messages.map((msg) => (
+            <MessageBubble key={msg.id} message={msg} />
+          ))}
+        </div>
       </div>
 
       {/* Topics carousel */}
@@ -411,12 +500,13 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
         ) : (
           <div className="flex flex-col gap-2 p-3">
             <div
-              className={`flex items-center gap-2 rounded-full px-4 py-2 border transition-opacity ${
+              className={`flex items-center gap-2 rounded-full px-4 py-2 transition-opacity ${
                 isLoading ? "opacity-50" : "opacity-100"
               }`}
               style={{
-                background: "rgba(255,255,255,0.10)",
-                border: "1px solid rgba(255,255,255,0.20)",
+                background: "rgba(255,255,255,0.65)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
               }}
             >
               <input
@@ -427,7 +517,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
                 onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
                 disabled={isLoading}
                 placeholder="Ask me anything…"
-                className="flex-1 bg-transparent outline-none text-sm text-white placeholder:text-white/40"
+                className="flex-1 bg-transparent outline-none text-sm text-black placeholder:text-white/40"
               />
               <button
                 onClick={() => sendMessage(input)}
