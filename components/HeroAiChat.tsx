@@ -206,7 +206,7 @@ function MessageBubble({ message }: { message: Message }) {
     return (
       <div className="flex items-start gap-2 justify-start">
         <AssistantAvatar />
-        <p className="text-sm text-white/90 leading-relaxed max-w-[80%]">
+        <p className="text-sm text-black/90 leading-relaxed max-w-[80%]">
           {message.content || (
             <span className="animate-pulse opacity-70">▍</span>
           )}
@@ -342,12 +342,12 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
     <div
       className="relative flex flex-col w-full sm:w-[360px] h-[100dvh] sm:h-[620px] rounded-none sm:rounded-[40px]"
       style={{
-        background: "rgba(255, 255, 255, 0.08)",
+        background: "rgba(255, 255, 255, 0.5)",
         backdropFilter: "blur(48px) saturate(160%)",
         WebkitBackdropFilter: "blur(48px) saturate(160%)",
-        border: "1px solid rgba(255, 255, 255, 0.28)",
+        border: "1px solid rgba(255, 255, 255, 0.6)",
         boxShadow:
-          "0 8px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.45)",
+          "0 8px 40px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.7)",
         overflow: "hidden",
       }}
     >
@@ -364,7 +364,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
       />
 
       {/* Top bar */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-white/15 relative z-10 flex-shrink-0">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-black/10 relative z-10 flex-shrink-0">
         {/* Avatar */}
         <div
           className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
@@ -374,10 +374,10 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
         </div>
         {/* Name */}
         <div className="flex flex-col">
-          <span className="text-white text-sm font-semibold leading-tight">
+          <span className="text-gray-900 text-sm font-semibold leading-tight">
             Kyron
           </span>
-          <span className="text-white/60 text-xs leading-tight">
+          <span className="text-gray-500 text-xs leading-tight">
             AI assistant
           </span>
         </div>
@@ -385,7 +385,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
         {onClose && (
           <button
             onClick={onClose}
-            className="ml-auto flex items-center justify-center w-8 h-8 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            className="ml-auto flex items-center justify-center w-8 h-8 rounded-full text-gray-400 hover:text-gray-700 hover:bg-black/8 transition-colors"
             aria-label="Close chat"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -417,10 +417,10 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
             transition: "opacity 400ms ease, transform 400ms ease",
           }}
         >
-          <p className="text-white text-[22px] font-medium text-center leading-snug">
+          <p className="text-gray-900 text-[22px] font-medium text-center leading-snug">
             Hi, I&apos;m Kyron.
           </p>
-          <p className="text-white text-[22px] font-medium text-center leading-snug mt-1">
+          <p className="text-gray-900 text-[22px] font-medium text-center leading-snug mt-1">
             How can we improve your finances today?
           </p>
         </div>
@@ -441,7 +441,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
 
       {/* Topics carousel */}
       <div
-        className={`flex-shrink-0 border-t border-white/15 relative z-10 transition-opacity duration-300 ${
+        className={`flex-shrink-0 border-t border-black/10 relative z-10 transition-opacity duration-300 ${
           showTopics ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
@@ -470,19 +470,19 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
       </div>
 
       {/* Input area */}
-      <div className="flex-shrink-0 border-t border-white/15 relative z-10">
+      <div className="flex-shrink-0 border-t border-black/10 relative z-10">
         {error && (
-          <div className="mx-3 mt-3 bg-red-500/20 border border-red-500/30 text-white/90 text-xs rounded-xl px-3 py-2 flex items-center justify-between">
+          <div className="mx-3 mt-3 bg-red-500/15 border border-red-500/25 text-red-700 text-xs rounded-xl px-3 py-2 flex items-center justify-between">
             <span>{error}</span>
             <button
               onClick={() => setError(null)}
-              className="text-white/60 hover:text-white ml-2 leading-none"
+              className="text-red-400 hover:text-red-600 ml-2 leading-none"
             >
               ✕
             </button>
           </div>
         )}
-
+        {/* TODO: remove CTA button */}
         {showCTA ? (
           <div className="p-4 flex justify-center">
             <button
@@ -517,7 +517,7 @@ export default function HeroAiChat({ onClose }: { onClose?: () => void }) {
                 onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
                 disabled={isLoading}
                 placeholder="Ask me anything…"
-                className="flex-1 bg-transparent outline-none text-sm text-black placeholder:text-white/40"
+                className="flex-1 bg-transparent outline-none text-sm text-black placeholder:text-black/40"
               />
               <button
                 onClick={() => sendMessage(input)}
