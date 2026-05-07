@@ -60,9 +60,11 @@ export default function Hero() {
         </button>
       </div>
 
-      {/* Chat card — z-[60] overrides nav's z-50 when open */}
+      {/* Chat card
+          Mobile: fixed full-screen overlay (escapes overflow-hidden + rounded hero)
+          Desktop: relative inside the hero section with padding */}
       <div
-        className={`relative w-full flex items-center justify-center sm:px-4 sm:py-8 transition-all duration-500 ${
+        className={`fixed inset-0 sm:relative sm:inset-auto w-full flex items-center justify-center sm:px-4 sm:py-8 transition-all duration-500 ${
           showChat
             ? "opacity-100 scale-100 z-[60]"
             : "opacity-0 pointer-events-none scale-95 z-10"
