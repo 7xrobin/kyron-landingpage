@@ -11,7 +11,11 @@ function SparkleIcon() {
   );
 }
 
-export default function Nav() {
+interface NavProps {
+  onCtaClick?: () => void;
+}
+
+export default function Nav({ onCtaClick }: NavProps) {
   return (
     <nav className="absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[82%] max-w-2xl p-2">
       <div
@@ -31,6 +35,7 @@ export default function Nav() {
 
         {/* CTA */}
         <button
+          onClick={onCtaClick}
           className="flex items-center gap-1.5 rounded-full px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           style={{ background: "var(--color-gray-900)" }}
         >
