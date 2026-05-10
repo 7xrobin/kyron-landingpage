@@ -5,7 +5,6 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import SectionBlock from "@/components/SectionBlock";
 import BalanceCard from "@/components/cards/BalanceCard";
-import BudgetCard from "@/components/cards/BudgetCard";
 import GoalCard from "@/components/cards/GoalCard";
 import PortfolioCard from "@/components/cards/PortfolioCard";
 import ContactModal from "@/components/ContactModal";
@@ -36,21 +35,9 @@ export default function Home() {
       />
 
       <SectionBlock
-        label="Budgeting"
-        title="Spend with intention, wherever you are."
-        description="Budget across currencies without mental math. Know exactly where your money goes in every country, every week, every month."
-        ctaText="Get early access"
-        onCtaClick={openContact}
-        card={<BudgetCard expanded={true} onToggle={() => {}} />}
-        imageSrc="/sections/person_beach.png"
-        imageAlt="Person at beach"
-        imageFirst={true}
-      />
-
-      <SectionBlock
-        label="Savings"
-        title="Set goals. Stay on track. Anywhere."
-        description="Whether you're saving in euros or reais, Kyron keeps your milestones in sight. Set targets in any currency and watch your progress in real time."
+        label="Goals & Budget"
+        title="Plan your goals. Manage your spending. Anywhere."
+        description="Set targets in any currency and track your progress in real time — then switch to budget view to see exactly what you're spending, week by week."
         ctaText="Get early access"
         onCtaClick={openContact}
         card={<GoalCard expanded={true} onToggle={() => {}} />}

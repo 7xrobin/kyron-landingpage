@@ -41,7 +41,7 @@ export default function BalanceCard({ expanded, onToggle }: Props) {
       floatDelay="0s"
       positionClass=""
     >
-      <div className="flex flex-col gap-3 md:gap-4">
+      <div className={`flex flex-col gap-3 md:gap-4 flex-1 ${view === "accounts" ? "justify-center" : ""}`}>
         {/* Header */}
         <div className="flex items-center gap-3">
           <div

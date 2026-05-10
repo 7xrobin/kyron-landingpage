@@ -43,6 +43,8 @@ export default function GlassCard({
             backdropFilter: "blur(48px) saturate(160%)",
             WebkitBackdropFilter: "blur(48px) saturate(160%)",
             border: "1px solid rgba(255, 255, 255, 0.28)",
+            display: "flex",
+            flexDirection: "column",
             boxShadow: [
               "0 8px 40px rgba(0, 0, 0, 0.18)",
               "inset 0 1px 0 rgba(255, 255, 255, 0.45)",

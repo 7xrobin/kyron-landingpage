@@ -68,18 +68,22 @@ export default function SectionBlock({
     </div>
   );
 
-  // Mobile: centered. Desktop: overhang the outside edge by 5%.
+  // Mobile: left-0 (aligns with text), desktop: overhang outside edge by 5%.
   const cardPositionClass = imageFirst
-    ? "left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[-5%]"
-    : "left-1/2 -translate-x-1/2 md:translate-x-0 md:left-[-5%]";
+    ? "left-0 md:left-auto md:right-[-5%]"
+    : "left-0 md:left-[-5%]";
 
   const imageColumn = (
     <div className="relative">
-      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px]">
-        <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
+      {/* Mobile: 5% narrower from left, right-aligned. Desktop: full width. */}
+      <div className="ml-[5%] w-[95%] md:ml-0 md:w-full">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[24px]">
+          <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
+        </div>
       </div>
 
-      <div className={`absolute bottom-[10%] z-10 ${cardPositionClass}`}>
+      {/* Mobile: vertically centered on image. Desktop: bottom-[10%]. */}
+      <div className={`absolute z-10 top-1/2 -translate-y-1/2 md:top-auto md:translate-y-0 md:bottom-[10%] ${cardPositionClass}`}>
         <div style={{ transform: `translateY(${parallaxY}px)` }}>
           {card}
         </div>

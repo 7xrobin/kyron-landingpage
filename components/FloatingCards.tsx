@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import BalanceCard from "@/components/cards/BalanceCard";
 import GoalCard from "@/components/cards/GoalCard";
 import PortfolioCard from "@/components/cards/PortfolioCard";
-import BudgetCard from "@/components/cards/BudgetCard";
 
-type CardIndex = 0 | 1 | 2 | 3;
+type CardIndex = 0 | 1 | 2;
 
 export default function FloatingCards() {
   const [active, setActive] = useState<CardIndex | null>(null);
@@ -15,7 +14,7 @@ export default function FloatingCards() {
     const id = setInterval(
       () =>
         setActive((prev) =>
-          prev === null ? 0 : (((prev + 1) % 4) as CardIndex),
+          prev === null ? 0 : (((prev + 1) % 3) as CardIndex),
         ),
       30_000,
     );
@@ -29,7 +28,6 @@ export default function FloatingCards() {
       <BalanceCard expanded={active === 0} onToggle={() => toggle(0)} />
       <PortfolioCard expanded={active === 1} onToggle={() => toggle(1)} />
       <GoalCard expanded={active === 2} onToggle={() => toggle(2)} />
-      <BudgetCard expanded={active === 3} onToggle={() => toggle(3)} />
     </>
   );
 }
